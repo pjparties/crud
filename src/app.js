@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import { ApiResponse } from "./utils/ApiResponse.js";
 
 const app = express();
 app.use(
@@ -23,11 +24,9 @@ app.get("/", (req, res) => {
 // define routes
 // import
 // app.use("/api/v1/<address>", <router>);
-import Product from "./models/dbHelper.js";
-import { ApiResponse } from "./utils/ApiResponse.js";
+import productsRouter from "./routes/products.routes.js";
 
-app.get("/api/v1/products", async (req, res) => {
-  return res.json(new ApiResponse(200, null, "success"));
-});
+app.use("/api/v1/products", productsRouter);
+
 
 export default app;
