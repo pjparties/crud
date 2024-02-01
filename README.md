@@ -1,47 +1,41 @@
-# Basic template to get started with backend server in Node / Express
+# CRUD Project using SQL API
 
-This is a basic template to help you get started with building a backend server using Node.js and Express.
-
-### add .env file and update package.json file accordingly to accomodate for sql and nosql
-
-## Technologies Used
-
-- Node.js
-- Express
-- SQL (can be changed to NoSQL)
-- Multer (for middlewares)
-- Cloudinary (for cloud hosting middlewares)
+This is the README file for the CRUD REST API using SQL database. This project aims to demonstrate basic CRUD (Create, Read, Update, Delete) operations using a SQL database.
 
 ## Prerequisites
 
-Before getting started, make sure you have the following installed:
+Before running this project, make sure you have the following prerequisites installed:
 
-- Node.js: [Download and install Node.js](https://nodejs.org)
-- Express: Install Express globally by running `npm install -g express`
+- SQL database (SQLite is used here)
+- Node and NPM installed (Node.js with Express)
 
-## Getting Started
+## Installation
 
-1. Clone this repository: `git clone <repository-url>`
-2. Install dependencies: `npm install`
-3. Start the server: `npm start`
+1. Clone the repository:
 
-## Configuration
+  ```bash
+  git clone https://github.com/pjparties/crud.git
+  ```
 
-- SQL Database: Configure your SQL database connection in the `config.js` file.
-- NoSQL Database: If you want to use a NoSQL database, update the code accordingly.
-- Multer: Configure Multer middleware options in the `multer.js` file.
-- Cloudinary: Configure Cloudinary middleware options in the `cloudinary.js` file.
+2. Install the required dependencies:
+
+  ```bash
+  cd crud-project
+  npm i
+  ```
+
+3. Configure the database connection:
+
+  Open the `pacakage.json` file and update the database connection details according to your setup.
+  
+    ```bash
+    npx knex migrate:latest
+    ```
 
 ## Usage
 
-- Define your routes and controllers in the `routes` directory.
-- Use the `app.js` file to configure your Express server.
-- Start the server by running `npm start`.
+To run the CRUD project, execute the following command:
 
-## Contributing
-
-Contributions are welcome! If you have any suggestions or improvements, feel free to open an issue or submit a pull request.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
+```bash
+npm run dev
+```
