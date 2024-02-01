@@ -28,9 +28,9 @@ Before running this project, make sure you have the following prerequisites inst
 
   Open the `pacakage.json` file and update the database connection details according to your setup.
   
-    ```bash
-    npx knex migrate:latest
-    ```
+  ```bash
+  npx knex migrate:latest
+  ```
 
 ## Usage
 
