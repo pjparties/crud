@@ -84,15 +84,55 @@ const addProduct = asyncHandler(async (req, res) => {
 });
 
 const updateProduct = asyncHandler(async (req, res) => {
-  const count = await db("products")
-    .where({ id: req.params.id })
-    .update(req.body);
-  res.json(new ApiResponse(200, count, "updated successfully"));
+  const { product_name, description, price, quantity } = req.body;
+  if (!product_name || !(description || price || quantity)) {
+    return res
+      .status(400)
+      .json(
+        new ApiError(
+          400,
+          null,
+          "Please provide a product_name and atleast one from (description, price, quantity)"
+        )
+      );
+  }
+
+  const productFound = await db("products").where({ product_name }).first();
+  if (!productFound) {
+    return res.status(404).json(new ApiError(404, null, "No product found"));
+  }
+
+  const count = await db("products").where({ product_name }).update(req.body);
+  if (!count) {
+    return res
+      .status(500)
+      .json(new ApiError(500, null, "Server Error while updating record"));
+  }
+
+  return res.json(new ApiResponse(200, count, "Product updated successfully"));
 });
 
 const removeProduct = asyncHandler(async (req, res) => {
-  const count = await db("products").where({ id: req.params.id }).del();
-  res.json(new ApiResponse(200, count, "deleted product"));
+  const { product_name } = req.body;
+  if (!product_name) {
+    return res
+      .status(400)
+      .json(new ApiError(400, null, "Please provide a product_name"));
+  }
+
+  const productFound = await db("products").where({ product_name }).first();
+  if (!productFound) {
+    return res.status(404).json(new ApiError(404, null, "No product found"));
+  }
+
+  const count = await db("products").where({ product_name }).del();
+  if (!count) {
+    return res
+      .status(500)
+      .json(new ApiError(500, null, "Server Error while deleting record"));
+  }
+
+  return res.json(new ApiResponse(200, count, "Product deleted successfully"));
 });
 
 export {
